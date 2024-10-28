@@ -23,7 +23,8 @@ customer = {
     'totalcharges': 3320.75
 }
 
-url = 'http://localhost:9696/predict' ## this is the route we made for prediction
+host = 'http://churn-serving-env.eba-q7kcrmdm.eu-west-3.elasticbeanstalk.com/'
+url = f'http://{host}/predict' ## this is the route we made for prediction
 response = requests.post(url, json=customer).json() ## post the customer information in json format and get the server response
 
 print(response)
