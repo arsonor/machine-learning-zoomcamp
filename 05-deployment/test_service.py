@@ -6,7 +6,7 @@ customer = {
     'seniorcitizen': 0,
     'partner': 'no',
     'dependents': 'no',
-    'tenure': 41,
+    'tenure': 1,
     'phoneservice': 'yes',
     'multiplelines': 'no',
     'internetservice': 'dsl',
@@ -23,7 +23,7 @@ customer = {
     'totalcharges': 3320.75
 }
 
-host = 'http://churn-serving-env.eba-q7kcrmdm.eu-west-3.elasticbeanstalk.com/'
+host = 'churn-serving-dev.eu-west-3.elasticbeanstalk.com/'
 url = f'http://{host}/predict' ## this is the route we made for prediction
 response = requests.post(url, json=customer).json() ## post the customer information in json format and get the server response
 

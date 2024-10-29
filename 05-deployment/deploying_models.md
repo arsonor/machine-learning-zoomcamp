@@ -144,12 +144,17 @@ eb init --profile martin -p docker -r eu-west-3 churn-serving
 ```bash
 eb local run --port 9696
 ```
-ERROR: NotSupportedError - You can use "eb local" only with preconfigured, generic and multicontainer Docker platforms.
+I get the following error:
+ERROR: NotSupportedError - You can use "eb local" only with preconfigured, generic and multicontainer Docker platforms.  
+Answer:
+There are two options to fix this:
+* Re-initialize by running eb init -i and choosing the options from a list (the first default option for docker platform should be fine). 
+* Edit the ‘.elasticbeanstalk/config.yml’ directly changing the default_platform from Docker to default_platform: Docker running on 64bit Amazon Linux 2023
 
 ```bash
-eb create churn-serving-env
+eb create churn-serving-env --enable-spot
 ```
-ERROR   Creating Auto Scaling launch configuration failed Reason: Resource handler returned message: "The Launch Configuration creation operation is not available in your account. Use launch templates to create configuration templates for your Auto Scaling groups. (Service: AutoScaling, Status Code: 400, Request ID: 6a5f8868-87cb-4083-9031-06d53d4fffa8)" (RequestToken: a51702e1-3669-c5b1-d87b-359e0578ec5e, HandlerErrorCode: GeneralServiceException)
+
 
 ## 5.9 Explore more
 
