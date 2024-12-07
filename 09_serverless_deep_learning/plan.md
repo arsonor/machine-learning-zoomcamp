@@ -32,6 +32,9 @@ We'll deploy the clothes classification model we trained previously.
 * Preparing the Dockerfile
 * Using the right TF-Lite wheel
 
+docker build -t clothing-model .
+docker run -it --rm -p 8080:8080 clothing-model:latest
+
 
 ## 9.6 Creating the lambda function
 
