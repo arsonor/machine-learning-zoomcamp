@@ -32,7 +32,7 @@ We'll deploy the clothes classification model we trained previously.
 * Preparing the Dockerfile
 * Using the right TF-Lite wheel
 
-docker build -t clothing-model .
+docker build -t clothing-model .  
 docker run -it --rm -p 8080:8080 clothing-model:latest
 
 
@@ -43,6 +43,23 @@ docker run -it --rm -p 8080:8080 clothing-model:latest
 * Configuring it
 * Testing the function from the AWS Console
 * Pricing
+
+pip install awscli (version 2)  
+
+aws sso login --profile <profile_name>
+
+aws ecr create-repository --repository-name clothing-tflite-images --profile <profile_name>  
+
+aws ecr get-login-password --region eu-west-3 --profile <profile_name> | docker login --username AWS --password-stdin 886436962520.dkr.ecr.eu-west-3.amazonaws.com
+
+REGISTRY=clothing-tflite-images  
+TAG=clothing-model-xception-v4-001  
+PREFIX=${ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com/${REGISTRY}  
+REMOTE_URI=${PREFIX}:${TAG}  
+
+docker tag clothing-model:latest ${REMOTE_URI}  
+docker push ${REMOTE_URI}
+
 
 
 ## 9.7 API Gateway: exposing the lambda function
