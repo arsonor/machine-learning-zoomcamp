@@ -1,5 +1,5 @@
-import tensorflow.lite as tflite
-# import tflite_runtime.interpreter as tflite
+# import tensorflow.lite as tflite
+import tflite_runtime.interpreter as tflite
 
 import os
 import numpy as np
