@@ -31,7 +31,7 @@ In this section we'll deploy tf-serving model to kubernetes. In order to do that
   - Load the model image to kind: `kind load docker-image clothing-model:xception-v4-001`
   - Create model deployment: `kubectl apply -f model-deployment.yaml`
   - Get the running pod id for the model: `kubectl get pod`
-  - Test the model deployment using the pod id: `kubectl port-forword tf-serving-clothing-model-85cd6dsb6-rfvg410m 8500:8500` and run `gateway.py` script to get the predictions.
+  - Test the model deployment using the pod id: `kubectl port-forward tf-serving-clothing-model-85cd6dsb6-rfvg410m 8500:8500` and run `gateway.py` script to get the predictions.
 - Create service of tf-serving model `model-service.yaml`:
   - ```yaml
     apiVersion: v1
@@ -46,7 +46,7 @@ In this section we'll deploy tf-serving model to kubernetes. In order to do that
       - port: 8500
         targetPort: 8500
     ```
-  - Create model service: `kubectl apply -f mdoel-service.yaml`
+  - Create model service: `kubectl apply -f model-service.yaml`
   - Check the model service: `kubectl get service`.
   - Test the model service: `kubectl port-forward service/tf-serving-clothing-model 8500:8500` and run `gateway.py` for predictions.
 - Create deployment for the gateway `gateway-deployment.yaml`:
@@ -75,7 +75,7 @@ In this section we'll deploy tf-serving model to kubernetes. In order to do that
             - containerPort: 9696
             env: # set the enivornment variable for model
               - name: TF_SERVING_HOST
-                value: tf-serving-clothing-model.default.svc.cluster.local:8500 # kubernates naming convention
+                value: tf-serving-clothing-model.default.svc.cluster.local:8500 # kubernetes naming convention
     ```
   - Load the gateway image to kind: `kind load docker-image clothing-model-gateway:002`
   - Create gateway deployment `kubectl apply -f gateway-deployment.yaml` and get the running pod id `kubectl get pod`
